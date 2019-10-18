@@ -5,7 +5,7 @@ const initialState = {
     users: []
 };
 
-function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch(action.type) {
         case ADD_COMMENT:
             return Object.assign({}, state, {
@@ -24,19 +24,37 @@ function reducer(state = initialState, action) {
         case EDIT_COMMENT: 
             return Object.assign({}, state, {
                 comments:  state.comments.map(comment => {
-                comment.id === action.id ? comment.text === action.text : comment ;
+                    if (comment.id === action.id) {
+                        return {
+                            ...comment,
+                            text : action.text
+                        }
+                    }
+                    return comment;
                 })
             });
         case THUMB_UP_COMMENT: 
             return Object.assign({}, state, {
                 comments: state.comments.map(comment => {
-                    comment.id === action.id ? comment.votes++ : comment ;
+                    if (comment.id === action.id) {
+                        return {
+                            ...comment,
+                             votes: action.votes++ 
+                            }
+                    }  
+                    return comment;
                 })
             });
         case THUMB_DOWN_COMMENT: 
             return Object.assign({}, state, {
                 comments: state.comments.map(comment => {
-                    comment.id === action.id ? comment.votes-- : comment ;
+                    if (comment.id === action.id) {
+                        return {
+                            ...comment,
+                            votes: action.votes --
+                        }
+                    } 
+                    return comment ;
                 })
             });
 
