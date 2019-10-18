@@ -39,7 +39,7 @@ export default function comments(state = initialState, action) {
                     if (comment.id === action.id) {
                         return {
                             ...comment,
-                             votes: action.votes++ 
+                             votes: comment.votes++ 
                             }
                     }  
                     return comment;
@@ -51,7 +51,7 @@ export default function comments(state = initialState, action) {
                     if (comment.id === action.id) {
                         return {
                             ...comment,
-                            votes: action.votes --
+                            votes: comment.votes --
                         }
                     } 
                     return comment ;
